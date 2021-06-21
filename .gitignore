@@ -1,0 +1,5 @@
+# 忽略文件夹
+# 忽略VSCode初始文件夹
+.vscode
+# 忽略executable
+run
