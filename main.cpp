@@ -1,9 +1,6 @@
-#include "Eigen\Dense"
 #include <iostream>
 #include "Matcher.h"
 #include "HungarianMatcher.h"
-
-
 
 int main(int argc, char const *argv[])
 {
@@ -26,7 +23,8 @@ int main(int argc, char const *argv[])
     // posit_dists(2, 3) = 1;
     // // show similar matrix
     // std::cout << posit_dists << std::endl;
-    Matcher* matcher = new HungarianMatcher();
+    
+    Matcher *matcher = new HungarianMatcher();
     Eigen::Matrix<float, 2, 2> m1;
     m1 << 0, 1,
         1, 1;
@@ -34,6 +32,8 @@ int main(int argc, char const *argv[])
     m2 << 0, 2,
         0, 3,
         0, 4;
-    matcher->cosineDistance(m1, m2);
+    matcher->cosine_distance(m1, m2);
+    matcher->pairwise_distance(m1, m2);
+
     return 0;
 }
