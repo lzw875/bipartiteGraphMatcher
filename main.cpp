@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Matcher.h"
 #include "HungarianMatcher.h"
+#include "GreedyMatcher.h"
 
 int main(int argc, char const *argv[])
 {
@@ -23,8 +24,8 @@ int main(int argc, char const *argv[])
     // posit_dists(2, 3) = 1;
     // // show similar matrix
     // std::cout << posit_dists << std::endl;
-    
-    Matcher *matcher = new HungarianMatcher();
+
+    Matcher *matcher = new GreedyMatcher();
     Eigen::Matrix<float, 2, 2> m1;
     m1 << 0, 1,
         1, 1;
@@ -33,7 +34,16 @@ int main(int argc, char const *argv[])
         0, 3,
         0, 4;
     matcher->cosine_distance(m1, m2);
-    matcher->pairwise_distance(m1, m2);
+    Eigen::Matrix<float, -1, -1> res;
+    res = matcher->pairwise_distance(m1, m2);
+    std::vector<int> mat;
+    mat = matcher->matcher(res, 3);
+    for (size_t i = 0; i < mat.size(); i++)
+    {
+        std::cout << "newly[" << i << "]"
+                  << "->"
+                  << "existed[" << mat[i] << "]" << std::endl;
+    }
 
     return 0;
 }
